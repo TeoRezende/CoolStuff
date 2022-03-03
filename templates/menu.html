@@ -4,6 +4,18 @@
 menu
 {% endblock %}
 
-{% block main %}
 
+{% block main %}
+    <div class = "products">
+    {% for id in product %}
+    <div class="product-box">
+        <h3>{{ product[0] }}</h3>
+        <p>{{ product[1] }}</p>
+        <p><strong>Volume:</strong>{{ product[2] }}</p>
+        <p><strong>Price:</strong>${{ product[3] }}</p>
+        <img src="static/>images/{{ product[4] }}.jpg">
+    </div>
+        <br>
+    {% endfor %}
+    </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import sqlite3
 app = Flask(__name__)
-DATABASE = "C:/Users/d.banseman/OneDrive - Wellingaton College/13DTS/Python2022/Smile/Smile.db"
+DATABASE = "C:/Users/d.benseman/OneDrive - Wellington College/13DTS/Python2022/Smile/Smile.db"
 
 def create_connection(db_file):
     try:

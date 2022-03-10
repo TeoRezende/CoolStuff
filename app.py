@@ -14,12 +14,12 @@ def create_connection(db_file):
 
 
 
-
+#homepage
 @app.route('/')
 def render_homepage():
     return render_template('home.html')
 
-
+#menu
 @app.route('/menu')
 def render_menu_page():
 
@@ -35,9 +35,19 @@ def render_menu_page():
     print(product_list)
     return render_template('menu.html', products=product_list)
 
+#contact
 @app.route('/contact')
 def render_contact_page():
     return render_template('contact.html')
 
+#Signup
+@app.route('/signup')
+def render_signup_page():
+    return render_template('signup.html')
+
+#login
+@app.route('/login')
+def render_login_page():
+    return render_template('login.html')
 
 app.run(host='0.0.0.0', debug=True)

@@ -59,27 +59,46 @@ def render_contact_page():
 #Signup
 @app.route('/signup', methods=['GET', 'POST'])
 def render_signup_page():
-    print(request.form)
-    fname = request.form.get("fname")
-    lname = request.form.get("lname")
-    email = request.form.get("email")
-    pword = request.form.get("pword")
-    pword2 = request.form.get("pword2")
+    if request.method == 'POST':
+        print(request.form)
+        fname = request.form.get("fname").title() #I'm not using the .strip() function for the names because my name contains spaces.
+        lname = request.form.get("lname").title()
+        email = request.form.get("email").strip().lower().title()
+        pword = request.form.get("pword")
+        pword2 = request.form.get("pword2")
 
-    con = create_connection(DATABASE)
+        if pword != pword2:
+            return redirect("/signup?error=Passwords+don't+match")
 
-    query = "INSERT INTO customer(id, fname, lname, email, pword) VALUES(NULL,?,?,?,?)"
+        if len(pword) < 8:
+            return redirect("/signup?error=Password+must+have+more+than+8+characters")
 
-    cur = con.cursor()
-    cur.execute(query, (fname, lname, email, pword))
-    con.commit()
-    con.close()
+        if len(pword) > 2000:
+            return redirect("/signup?error=Password+cannot+be+more+than+2000+characters")
+
+
+
+
+        con = create_connection(DATABASE)
+
+        query = "INSERT INTO customer(id, fname, lname, email, pword) VALUES(NULL,?,?,?,?)"
+
+        cur = con.cursor()
+        try:
+            cur.execute(query, (fname, lname, email, pword))
+        except sqlite3.IntegrityError:
+            return redirect('/signup?error=Email+is+already+in+use')
+        con.commit()
+        con.close()
 
     return render_template('signup.html')
 
 #login
 @app.route('/login', methods=["GET", "POST"])
 def render_login_page():
+    if request.method == 'POST':
+        email = request.form['email'].strip().lower()
+        pword = request.form['password'].strip()
     return render_template('login.html')
 
 app.run(host='0.0.0.0', debug=True)

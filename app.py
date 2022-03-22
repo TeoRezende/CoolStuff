@@ -4,6 +4,7 @@ from sqlite3 import Error
 from flask_bcrypt import Bcrypt
 from datetime import datetime
 app = Flask(__name__)
+app.secret_key = "a47n59fdjkr932jnegslq03nswor04923kr41rf"
 DATABASE = "C:/Users/18126/Documents/Smile/smile.db"
 #test
 def create_connection(db_file):
@@ -63,7 +64,7 @@ def render_signup_page():
         print(request.form)
         fname = request.form.get("fname").title() #I'm not using the .strip() function for the names because my name contains spaces.
         lname = request.form.get("lname").title()
-        email = request.form.get("email").strip().lower().title()
+        email = request.form.get("email").strip().lower()
         pword = request.form.get("pword")
         pword2 = request.form.get("pword2")
 
@@ -76,9 +77,6 @@ def render_signup_page():
         if len(pword) > 2000:
             return redirect("/signup?error=Password+cannot+be+more+than+2000+characters")
 
-
-
-
         con = create_connection(DATABASE)
 
         query = "INSERT INTO customer(id, fname, lname, email, pword) VALUES(NULL,?,?,?,?)"
@@ -90,6 +88,7 @@ def render_signup_page():
             return redirect('/signup?error=Email+is+already+in+use')
         con.commit()
         con.close()
+        return redirect('/login')
 
     return render_template('signup.html')
 
@@ -98,7 +97,38 @@ def render_signup_page():
 def render_login_page():
     if request.method == 'POST':
         email = request.form['email'].strip().lower()
-        pword = request.form['password'].strip()
-    return render_template('login.html')
+        pword = request.form['pword'].strip()
 
+        query = """SELECT id, fname, lname, pword FROM customer WHERE email = ?"""
+        con = create_connection(DATABASE)
+        cur = con.cursor()
+        cur.execute(query, (email,))
+        user_data = cur.fetchall()
+        con.close()
+
+        try:
+            userid = user_data[0][0]
+            firstname = user_data[0][1]
+            lastname = user_data[0][2]
+            password = user_data[0][3]
+        except IndexError:
+            print("eee")
+            return redirect("/login?error=Email+invalid+or+password+incorrect")
+
+        #checking if the password is valid
+        if password != pword:
+            return redirect("/login?error=Email+invalid+or+password+incorrect")
+
+        session['email'] = email
+        session["userid"] = userid
+        session["fname"] = firstname
+        session['lname'] = lastname
+        print(session)
+        return redirect('/')
+    #redirects to the page but has now set the logged_in variable to 1
+    return render_template('login.html', logged_in=1)
+
+@app.route('/logout')
+def logout():
+    print('nutz')
 app.run(host='0.0.0.0', debug=True)

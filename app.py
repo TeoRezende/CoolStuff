@@ -97,7 +97,7 @@ def render_signup_page():
 def render_login_page():
     if request.method == 'POST':
         email = request.form['email'].strip().lower()
-        pword = request.form['pword'].strip()
+        pword = request.form['pword']
 
         query = """SELECT id, fname, lname, pword FROM customer WHERE email = ?"""
         con = create_connection(DATABASE)

@@ -112,7 +112,6 @@ def render_login_page():
             lastname = user_data[0][2]
             password = user_data[0][3]
         except IndexError:
-            print("eee")
             return redirect("/login?error=Email+invalid+or+password+incorrect")
 
         #checking if the password is valid
@@ -126,9 +125,23 @@ def render_login_page():
         print(session)
         return redirect('/')
     #redirects to the page but has now set the logged_in variable to 1
-    return render_template('login.html', logged_in=1)
+    return render_template('login.html', logged_in=is_logged_in())
+
+def is_logged_in():
+    if session.get("email") is None:
+        print("Not logged in")
+        return False
+    else:
+        print("Logged in")
+        return True
+
 
 @app.route('/logout')
 def logout():
-    print('nutz')
+    print(list(session.keys()))
+    [session.pop(key) for key in list(session.keys())]
+    print(list(session.keys()))
+    return redirect('/?message=See+you+next+time!')
+
+
 app.run(host='0.0.0.0', debug=True)

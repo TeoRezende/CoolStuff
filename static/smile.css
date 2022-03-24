@@ -27,6 +27,8 @@ img {
 }
 
 h1 {
+    background-color: rgba(44, 62, 80, 1.0);
+    color: ghostwhite;
     text-align: center;
     font-weight: 200;
     font-size: 4rem;
@@ -34,6 +36,8 @@ h1 {
 }
 
 h2 {
+    background-color: rgba(44, 62, 80, 1.0);
+    color: floralwhite;
     font-size: 2rem;
     text-align: center;
     margin: 0 0 0.5rem 0;
@@ -56,7 +60,6 @@ nav {
 
 .navbar-links {
     display: inline;
-    float: right;
 }
 
 nav a {

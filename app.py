@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 from datetime import datetime
 app = Flask(__name__)
 app.secret_key = "a47n59fdjkr932jnegslq03nswor04923kr41rf"
-DATABASE = "C:/Users/18126/Documents/Smile/smile.db"
+DATABASE = "C:/Users/18126/Documents/Maori/maoridic.db"
 #test
 def create_connection(db_file):
     try:

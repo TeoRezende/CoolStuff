@@ -13,13 +13,6 @@
         </library>
       </libraries>
     </data-source>
-    <data-source source="LOCAL" name="identifier.sqlite" uuid="80d7132c-aa5d-4139-9887-0c79b4e1b57a">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:identifier.sqlite</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
     <data-source source="LOCAL" name="smile [2]" uuid="a2c466c3-f001-47ae-9306-dec47d336efc">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
@@ -31,13 +24,6 @@
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
         </library>
       </libraries>
-    </data-source>
-    <data-source source="LOCAL" name="identifier.sqlite [2]" uuid="0c0a2724-a6ee-441a-8613-88d3d2bb7c07">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:identifier.sqlite</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="User Data Source -" uuid="53566570-f9fb-4c88-9f77-0ccd08c2346b">
       <synchronize>true</synchronize>

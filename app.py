@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, session, redirect
 import sqlite3
 from sqlite3 import Error
-from flask_bcrypt import Bcrypt
 from datetime import datetime
 app = Flask(__name__)
 app.secret_key = "a47n59fdjkr932jnegslq03nswor04923kr41rf"
@@ -53,9 +52,9 @@ def render_menu_page():
     return render_template('menu.html', products=product_list)
 
 #contact
-@app.route('/contact')
+@app.route('/account')
 def render_contact_page():
-    return render_template('contact.html')
+    return render_template('account.html')
 
 #Signup
 @app.route('/signup', methods=['GET', 'POST'])
